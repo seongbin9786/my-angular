@@ -8,6 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "@my-angular/renderer": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
