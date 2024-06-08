@@ -1,4 +1,4 @@
-import { ComponentConstructor, ServiceConstructor } from "@/types/constructors";
+import { ComponentConstructor, ServiceConstructor } from "@renderer/types/constructors";
 
 export interface ComponentConfig {
     selector: string;

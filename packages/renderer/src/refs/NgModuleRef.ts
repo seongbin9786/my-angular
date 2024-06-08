@@ -1,13 +1,16 @@
-import { ComponentConstructor, ServiceConstructor } from "@/types/constructors";
-import { ModuleConfig } from "@/types/decoratorConfig";
+import { ComponentConstructor, ServiceConstructor } from "@renderer/types/constructors";
+import { ModuleConfig } from "@renderer/types/decoratorConfig";
 
 /**
  * @remarks angular의 모든 스펙을 구현하지 않고, Component, Service만을 우선 지원하도록 개발합니다.
  */
 export class NgModuleRef {
 
+    // @ts-ignore
     private declarations: ComponentConstructor[];
+    // @ts-ignore
     private providers: ServiceConstructor[];
+    // @ts-ignore
     private bootstrap?: ComponentConstructor;
 
     /**

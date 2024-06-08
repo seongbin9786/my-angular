@@ -1,4 +1,4 @@
-import { ComponentConfig } from "@/types/decoratorConfig";
+import { ComponentConfig } from "@renderer/types/decoratorConfig";
 
 /**
  * @remarks angular의 모든 스펙을 구현하지 않고, selector, template만 우선 지원하도록 개발합니다.

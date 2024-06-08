@@ -1,5 +1,5 @@
-import { ComponentConstructor } from "@/types/constructors";
-import { ComponentConfig } from "@/types/decoratorConfig";
+import { ComponentConstructor } from "@renderer/types/constructors";
+import { ComponentConfig } from "@renderer/types/decoratorConfig";
 
 export class ComponentConfigAndRefRegistry {
     private configMapping: Map<Function, ComponentConfig> = new Map();

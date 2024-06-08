@@ -1,6 +1,6 @@
-import { ComponentConfigAndRefRegistry } from "@/registries/ComponentRefRegistry";
-import { NgModuleConfigAndRefRegistry } from "@/registries/NgModuleRefRegistry";
-import { ServiceRefRegistry } from "@/registries/ServiceRegistry";
+import { ComponentConfigAndRefRegistry } from "@renderer/registries/ComponentRefRegistry";
+import { NgModuleConfigAndRefRegistry } from "@renderer/registries/NgModuleRefRegistry";
+import { ServiceRefRegistry } from "@renderer/registries/ServiceRegistry";
 
 /**
  * @summary Angular 내부적으로, 사용자 애플리케이션에 사용되는 데코레이터에서 직접 사용되는 싱글톤 registry입니다.
