@@ -1,6 +1,6 @@
 import { Injectable } from "@my-angular/renderer";
 
-@Injectable
+@Injectable()
 export class MyService {
 
     doSomeService() {

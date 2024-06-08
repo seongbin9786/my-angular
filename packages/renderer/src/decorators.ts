@@ -1,36 +1,48 @@
-import { componentConfigAndRefRegistry, moduleConfigAndRefRegistry, serviceRefRegistry } from "./instances/registry-instances";
-import { ModuleConstructor } from "./types/constructors";
+import { componentConfigAndRefRegistry, moduleConfigAndRefRegistry } from "./instances/registry-instances";
+import { ComponentConstructor, ModuleConstructor, ServiceConstructor } from "./types/constructors";
 import { ComponentConfig, ModuleConfig } from "./types/decoratorConfig";
 
-// decorator factory의 인자가 optional이어야 `@Component()`와 같이 호출 가능합니다.
-// factory 형식이면서 `@Component`처럼 `()` 호출 구문을 생략할 수는 없습니다.
-export const Component = (componentConfig?: ComponentConfig) => {
-    return (target: any) => {
-        if (!componentConfig) {
-            throw new Error('Component decorator must be called with config');
-        }
-        if (!(target instanceof Function)) {
+/**
+ * @param componentConfig Component는 Config가 필수 입력입니다.
+ */
+export const Component = (componentConfig: ComponentConfig) => {
+    if (!componentConfig) {
+        throw new Error('Component decorator must be called with config');
+    }
+
+    return function registerComponentConfig(componentConstructor: ComponentConstructor) {
+        if (!(componentConstructor instanceof Function)) {
             throw new Error('Component decorator must be used to classess');
         }
-        componentConfigAndRefRegistry.registerConfig(target, componentConfig);
+        console.log('reflection:', Reflect.getMetadata('design:paramtypes', componentConstructor));
+        componentConfigAndRefRegistry.registerConfig(componentConstructor, componentConfig);
     }
 }
 
+/**
+ * @remarks 현재는 추가 입력이 없습니다.
+ * @todo 서비스 Config가 필요한 시점에는 `registerConfig` 호출을 추가할 예정입니다.
+ */
 export const Injectable = () => {
-    return (target: any) => {
-        if (!(target instanceof Function)) {
+    return (serviceConstructor: ServiceConstructor) => {
+        if (!(serviceConstructor instanceof Function)) {
             throw new Error('Injectable decorator must be used to classess');
         }
-        serviceRefRegistry.registerRef(target);
     }
 }
 
-// Decorator Factory --- accepts parameters
+/**
+ * @param moduleConfig Module은 Config가 필수 입력입니다.
+ */
 export const NgModule = (moduleConfig: ModuleConfig) => {
+    if (!moduleConfig) {
+        throw new Error('NgModule decorator must be called with config');
+    }
 
-    console.log("NgModule Decorator Factory called!", moduleConfig);
-
-    return function registerModule(moduleConstructor: ModuleConstructor) {
+    return function registerNgModuleConfig(moduleConstructor: ModuleConstructor) {
+        if (!(moduleConstructor instanceof Function)) {
+            throw new Error('NgModule decorator must be used to classess');
+        }
         moduleConfigAndRefRegistry.registerConfig(moduleConstructor, moduleConfig);
     }
 }
