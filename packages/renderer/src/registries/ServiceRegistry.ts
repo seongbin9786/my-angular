@@ -1,4 +1,4 @@
-import { ServiceConstructor } from "@/types/constructors";
+import { ServiceConstructor } from "@renderer/types/constructors";
 
 /**
  * @summary Service의 생성자를 받아 singleton으로 인스턴스를 반환합니다.
@@ -7,19 +7,12 @@ import { ServiceConstructor } from "@/types/constructors";
 export class ServiceRefRegistry {
     private mapping: Map<ServiceConstructor, ServiceConstructor> = new Map();
 
-    registerRef(serviceConstructor: ServiceConstructor) {
-        if (this.mapping.has(serviceConstructor)) {
-            throw new Error(`ServiceRef already exsists for ${serviceConstructor.name}`);
-        }
-        const newInstance = new serviceConstructor();
-        this.mapping.set(serviceConstructor, newInstance);
-        console.log("[ServiceRegRegistry] service registered and instantiated!", serviceConstructor);
-    }
-    
     getRef(serviceConstructor: ServiceConstructor) {
         if (!this.mapping.has(serviceConstructor)) {
             throw new Error(`ServiceRef not found for ${serviceConstructor.name}`);
         }
+        const newInstance = new serviceConstructor();
+        this.mapping.set(serviceConstructor, newInstance);
         return this.mapping.get(serviceConstructor);
     }
 }
