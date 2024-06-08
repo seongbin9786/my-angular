@@ -1,4 +1,4 @@
-import { Component, Injectable, NgModule } from '@my-angular/renderer';
+import { Component, Injectable, NgModule, bootstrapModule } from '@my-angular/renderer';
 
 @Injectable
 class MyService {
@@ -33,17 +33,12 @@ class MyComponent {
     }
 }
 
-// NgModule에서는 
 @NgModule({
-    declarations: [],
+    declarations: [ MyComponent ],
     imports: [],
-    providers: [],
-    bootstrap: null,
+    providers: [ MyService ],
+    bootstrap: [ MyComponent ],
 })
-export class MyModule {} // ㅋㅋ 어디서도 안 씀ㅋ
+export class MyModule {}
 
-const x = new MyComponent(new MyService());
-
-// html 바인딩이 매우 필요하다...!
-// 처음에는 template string을 쓰는 게 맞을 듯? html을 다 읽어들여야 하려나...
-x.handleClick();
+bootstrapModule(MyModule);

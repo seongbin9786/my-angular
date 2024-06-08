@@ -1,8 +1,13 @@
 # Logs
-logs
-*.log
-pnpm-debug.log*
+**/logs
+**/*.log
+**/pnpm-debug.log*
 
-node_modules
-dist
-*.local
+## Dependencies
+**/node_modules
+**/dist
+**/.rollup.cache
+
+## Environments
+**/*.local
+**/env*
