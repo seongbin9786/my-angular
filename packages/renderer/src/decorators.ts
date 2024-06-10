@@ -1,4 +1,4 @@
-import { componentConfigAndRefRegistry, moduleConfigAndRefRegistry } from "./instances/registry-instances";
+import { componentRegistryInstance, moduleRegistryInstance, serviceRegistryInstance } from "./instances/registry-instances";
 import { ComponentConstructor, ModuleConstructor, ServiceConstructor } from "./types/constructors";
 import { ComponentConfig, ModuleConfig } from "./types/decoratorConfig";
 
@@ -14,8 +14,11 @@ export const Component = (componentConfig: ComponentConfig) => {
         if (!(componentConstructor instanceof Function)) {
             throw new Error('Component decorator must be used to classess');
         }
-        console.log('reflection:', Reflect.getMetadata('design:paramtypes', componentConstructor));
-        componentConfigAndRefRegistry.registerConfig(componentConstructor, componentConfig);
+
+        // 제대로 셋업이 되어 있다면 항상 배열이 오는 것 같습니다.
+        const typesOfParameters: any[] = Reflect.getMetadata('design:paramtypes', componentConstructor);
+        componentRegistryInstance.registerDependencies(componentConstructor, typesOfParameters);
+        componentRegistryInstance.registerConfig(componentConstructor, componentConfig);
     }
 }
 
@@ -28,6 +31,9 @@ export const Injectable = () => {
         if (!(serviceConstructor instanceof Function)) {
             throw new Error('Injectable decorator must be used to classess');
         }
+
+        const typesOfParameters: any[] = Reflect.getMetadata('design:paramtypes', serviceConstructor);
+        serviceRegistryInstance.registerDependencies(serviceConstructor, typesOfParameters);
     }
 }
 
@@ -43,6 +49,6 @@ export const NgModule = (moduleConfig: ModuleConfig) => {
         if (!(moduleConstructor instanceof Function)) {
             throw new Error('NgModule decorator must be used to classess');
         }
-        moduleConfigAndRefRegistry.registerConfig(moduleConstructor, moduleConfig);
+        moduleRegistryInstance.registerConfig(moduleConstructor, moduleConfig);
     }
 }

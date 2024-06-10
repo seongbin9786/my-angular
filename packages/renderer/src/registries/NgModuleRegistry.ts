@@ -2,21 +2,21 @@ import { NgModuleRef } from "@renderer/refs/NgModuleRef";
 import { ModuleConstructor } from "@renderer/types/constructors";
 import { ModuleConfig } from "@renderer/types/decoratorConfig";
 
-export class NgModuleConfigAndRefRegistry {
+export class NgModuleRegistry {
     private configMapping: Map<Function, ModuleConfig> = new Map();
     private refMapping: Map<Function, NgModuleRef> = new Map();
 
     registerConfig(moduleConstructor: ModuleConstructor, moduleConfig: ModuleConfig) {
         if (this.configMapping.has(moduleConstructor)) {
-            throw new Error(`NgModuleRef already exists for ${moduleConstructor.name}`);
+            throw new Error(`NgModule Config already exists for ${moduleConstructor.name}`);
         }
         this.configMapping.set(moduleConstructor, moduleConfig);
-        console.log("[NgModuleConfigAndRefRegistry] module registered!", moduleConfig);
+        console.log("[NgModuleRegistry] module registered!", moduleConfig);
     }
     
     getConfig(moduleConstructor: ModuleConstructor) {
         if (!this.configMapping.has(moduleConstructor)) {
-            throw new Error(`ModuleRef not found for ${moduleConstructor.name}`);
+            throw new Error(`Module Config not found for ${moduleConstructor.name}`);
         }
         return this.configMapping.get(moduleConstructor);
     }
@@ -38,7 +38,7 @@ export class NgModuleConfigAndRefRegistry {
         
         const newModuleRef = new NgModuleRef(moduleConfig);
         this.refMapping.set(moduleConstructor, newModuleRef);
-        console.log("[NgModuleConfigAndRefRegistry] created new module ref:", newModuleRef);
+        console.log("[NgModuleRegistry] created new module ref:", newModuleRef);
         return newModuleRef;
     }
 }

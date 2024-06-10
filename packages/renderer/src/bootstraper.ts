@@ -1,4 +1,4 @@
-import { moduleConfigAndRefRegistry } from "./instances/registry-instances";
+import { moduleRegistryInstance } from "./instances/registry-instances";
 import { ModuleConstructor } from "./types/constructors";
 
 /**
@@ -12,7 +12,7 @@ export const bootstrapModule = (rootModule: ModuleConstructor) => {
   */
   console.log('@@@@@ USER APP STARTS @@@@@');
 
-  const rootModuleRef = moduleConfigAndRefRegistry.getRef(rootModule);
+  const rootModuleRef = moduleRegistryInstance.getRef(rootModule);
 
   console.log('rootModule - that was registered - found:', rootModuleRef);
 }
