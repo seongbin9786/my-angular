@@ -5,15 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --p ./tsconfig.jsonc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@my-angular/renderer": "workspace:*"
   },
   "devDependencies": {
+    "@anatine/esbuild-decorators": "^0.2.19",
+    "@swc/core": "^1.5.27",
+    "reflect-metadata": "^0.2.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vite-plugin-swc-only": "^0.1.18",
     "vite-tsconfig-paths": "^4.3.2"
   }
 }
