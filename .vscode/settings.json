@@ -1,0 +1,13 @@
+{
+    "eslint.enable": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[typescript]": {
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        },
+    },
+    // 씨발 이게 없어서 존나게 안 돌았던 거임 씨발련이
+    "eslint.experimental.useFlatConfig": true
+}
