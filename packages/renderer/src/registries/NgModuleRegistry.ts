@@ -11,12 +11,12 @@ export class NgModuleRegistry {
             throw new Error(`NgModule Config already exists for ${moduleConstructor.name}`);
         }
         this.configMapping.set(moduleConstructor, moduleConfig);
-        console.log("[NgModuleRegistry] module registered!", moduleConfig);
+        console.log(`[NgModuleRegistry] module [${moduleConstructor.name}] registered - config:`, moduleConfig);
     }
     
     getConfig(moduleConstructor: ModuleConstructor) {
         if (!this.configMapping.has(moduleConstructor)) {
-            throw new Error(`Module Config not found for ${moduleConstructor.name}`);
+            throw new Error(`Module Config not found for [${moduleConstructor.name}]`);
         }
         return this.configMapping.get(moduleConstructor);
     }
@@ -28,7 +28,7 @@ export class NgModuleRegistry {
     getRef(moduleConstructor: ModuleConstructor) {
         const moduleConfig = this.configMapping.get(moduleConstructor);
         if (!moduleConfig) {
-            throw new Error(`ModuleRef not found for ${moduleConstructor.name}. No config has been registered.`);
+            throw new Error(`ModuleRef not found for [${moduleConstructor.name}]. No config has been registered.`);
         }
 
         const moduleRef = this.refMapping.get(moduleConstructor);

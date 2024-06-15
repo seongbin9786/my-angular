@@ -8,12 +8,12 @@ export class ServiceRegistry {
     private refMapping = new Map<ServiceConstructor, ServiceConstructor>();
     private dependenciesMapping = new Map<ServiceConstructor, ServiceConstructor[]>();
 
-    registerDependencies(componentConstructor: ServiceConstructor, dependencies: ServiceConstructor[]) {
-        if (this.dependenciesMapping.has(componentConstructor)) {
-            throw new Error(`Service Dependencies already exists for ${componentConstructor.name}`);
+    registerDependencies(serviceConstructor: ServiceConstructor, dependencies: ServiceConstructor[]) {
+        if (this.dependenciesMapping.has(serviceConstructor)) {
+            throw new Error(`Service Dependencies already exists for ${serviceConstructor.name}`);
         }
-        this.dependenciesMapping.set(componentConstructor, dependencies);
-        console.log("[ServiceRegistry] dependencies registered!", dependencies);
+        this.dependenciesMapping.set(serviceConstructor, dependencies);
+        console.log(`[ServiceRegistry] [${serviceConstructor.name}]'s dependencies registered:`, dependencies);
     }
     
     getRef(serviceConstructor: ServiceConstructor) {

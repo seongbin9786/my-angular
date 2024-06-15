@@ -10,7 +10,7 @@ export class ComponentRegistry {
             throw new Error(`Component Config already exists for ${componentConstructor.name}`);
         }
         this.configMapping.set(componentConstructor, componentConfig);
-        console.log("[ComponentRegistry] component registered!", componentConfig);
+        console.log(`[ComponentRegistry] [${componentConstructor.name}] registered - config:`, componentConfig);
     }
 
     registerDependencies(componentConstructor: ComponentConstructor, dependencies: ServiceConstructor[]) {
@@ -18,7 +18,7 @@ export class ComponentRegistry {
             throw new Error(`Component Dependencies already exists for ${componentConstructor.name}`);
         }
         this.dependenciesMapping.set(componentConstructor, dependencies);
-        console.log("[ComponentRegistry] dependencies registered!", dependencies);
+        console.log(`[ComponentRegistry] [${componentConstructor.name}]'s dependencies registered: `, dependencies);
     }
     
     getConfig(componentConstructor: ComponentConstructor) {
