@@ -1,9 +1,5 @@
-export interface ModuleConstructor extends Function {};
+export type ModuleConstructor = Function;
 
-export interface ComponentConstructor extends Function {
-    new(...args: any[]): any;
-};
+export type ComponentConstructor = new(...args: any[]) => any;
 
-export interface ServiceConstructor extends Function {
-    new(...args: any[]): any;
-};
+export type ServiceConstructor = new(...args: any[]) => any;

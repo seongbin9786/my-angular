@@ -5,8 +5,8 @@ import { ServiceConstructor } from "@renderer/types/constructors";
  * @remarks Service의 경우 현재 단순 생성만 필요하므로, 의존성 주입을 구현하지 않습니다.
  */
 export class ServiceRegistry {
-    private refMapping: Map<ServiceConstructor, ServiceConstructor> = new Map();
-    private dependenciesMapping: Map<ServiceConstructor, ServiceConstructor[]> = new Map();
+    private refMapping = new Map<ServiceConstructor, ServiceConstructor>();
+    private dependenciesMapping = new Map<ServiceConstructor, ServiceConstructor[]>();
 
     registerDependencies(componentConstructor: ServiceConstructor, dependencies: ServiceConstructor[]) {
         if (this.dependenciesMapping.has(componentConstructor)) {

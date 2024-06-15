@@ -2,8 +2,8 @@ import { ComponentConstructor, ServiceConstructor } from "@renderer/types/constr
 import { ComponentConfig } from "@renderer/types/decoratorConfig";
 
 export class ComponentRegistry {
-    private configMapping: Map<ComponentConstructor, ComponentConfig> = new Map();
-    private dependenciesMapping: Map<ComponentConstructor, ServiceConstructor[]> = new Map();
+    private configMapping = new Map<ComponentConstructor, ComponentConfig>();
+    private dependenciesMapping = new Map<ComponentConstructor, ServiceConstructor[]>();
 
     registerConfig(componentConstructor: ComponentConstructor, componentConfig: ComponentConfig) {
         if (this.configMapping.has(componentConstructor)) {
