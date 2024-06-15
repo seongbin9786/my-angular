@@ -12,7 +12,7 @@ import { MyService } from "./my-service";
     `,
 })
 export class MyComponent {
-    callCounter: number = 0;
+    callCounter = 0;
 
     constructor(private myService: MyService) {
     }
