@@ -7,12 +7,13 @@ import { MyService } from "./my-service";
     template: `
     <div>
         <div>hello world</div>
-        <span>for the {{callCounter}} times!</span>
+        <span>Welcome {{callCounter}}!</span>
+        <button (click)="handleClick()">Click me to raise the number!</button>
     </div>
     `,
 })
 export class MyComponent {
-    callCounter = 0;
+    callCounter = 12340;
 
     constructor(private myService: MyService) {
     }

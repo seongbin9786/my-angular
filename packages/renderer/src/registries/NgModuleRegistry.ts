@@ -5,6 +5,8 @@ import { ModuleConfig } from "@renderer/types/decoratorConfig";
 export class NgModuleRegistry {
     private configMapping = new Map<ModuleConstructor, ModuleConfig>();
     private refMapping = new Map<ModuleConstructor, NgModuleRef>();
+    /** @summary 루트 모듈 여부를 판단할 때 최초로 로딩되는 모듈 여부를 사용합니다. */
+    private hasRootModuleLoaded = false;
 
     registerConfig(moduleConstructor: ModuleConstructor, moduleConfig: ModuleConfig) {
         if (this.configMapping.has(moduleConstructor)) {
@@ -36,7 +38,11 @@ export class NgModuleRegistry {
             return moduleRef;
         }
         
-        const newModuleRef = new NgModuleRef(moduleConfig);
+        const newModuleRef = new NgModuleRef(moduleConfig, !this.hasRootModuleLoaded);
+        if (!this.hasRootModuleLoaded) {
+            this.hasRootModuleLoaded = true;
+        }
+
         this.refMapping.set(moduleConstructor, newModuleRef);
         console.log("[NgModuleRegistry] created new module ref:", newModuleRef);
         return newModuleRef;
