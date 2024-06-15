@@ -1,4 +1,4 @@
-import { ComponentConstructor, ServiceConstructor } from "@renderer/types/constructors";
+import { AllConstructor, ComponentConstructor, ServiceConstructor } from "@renderer/types/constructors";
 
 export interface ComponentConfig {
     selector: string;
@@ -7,7 +7,7 @@ export interface ComponentConfig {
 
 export interface ModuleConfig {
     declarations: ComponentConstructor[],
-    imports: Function[],
+    imports: AllConstructor[],
     providers: ServiceConstructor[],
     bootstrap: ComponentConstructor[],
 }

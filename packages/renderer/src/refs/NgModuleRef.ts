@@ -6,11 +6,8 @@ import { ModuleConfig } from "@renderer/types/decoratorConfig";
  */
 export class NgModuleRef {
 
-    // @ts-ignore
     private declarations: ComponentConstructor[];
-    // @ts-ignore
     private providers: ServiceConstructor[];
-    // @ts-ignore
     private bootstrap?: ComponentConstructor;
 
     /**

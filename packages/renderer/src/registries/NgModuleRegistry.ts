@@ -3,8 +3,8 @@ import { ModuleConstructor } from "@renderer/types/constructors";
 import { ModuleConfig } from "@renderer/types/decoratorConfig";
 
 export class NgModuleRegistry {
-    private configMapping = new Map<Function, ModuleConfig>();
-    private refMapping = new Map<Function, NgModuleRef>();
+    private configMapping = new Map<ModuleConstructor, ModuleConfig>();
+    private refMapping = new Map<ModuleConstructor, NgModuleRef>();
 
     registerConfig(moduleConstructor: ModuleConstructor, moduleConfig: ModuleConfig) {
         if (this.configMapping.has(moduleConstructor)) {

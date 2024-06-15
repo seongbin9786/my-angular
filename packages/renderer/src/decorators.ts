@@ -15,8 +15,9 @@ export const Component = (componentConfig: ComponentConfig) => {
             throw new Error('Component decorator must be used to classess');
         }
 
-        // 제대로 셋업이 되어 있다면 항상 배열이 오는 것 같습니다.
-        const typesOfParameters: any[] = Reflect.getMetadata('design:paramtypes', componentConstructor);
+        // 파라미터가 있다면 배열로, 없으면 undefined로 반환됩니다.
+        // FIXME: 
+        const typesOfParameters: ServiceConstructor[] = Reflect.getMetadata('design:paramtypes', componentConstructor) ?? [];
         componentRegistryInstance.registerDependencies(componentConstructor, typesOfParameters);
         componentRegistryInstance.registerConfig(componentConstructor, componentConfig);
     }
@@ -32,7 +33,7 @@ export const Injectable = () => {
             throw new Error('Injectable decorator must be used to classess');
         }
 
-        const typesOfParameters: any[] = Reflect.getMetadata('design:paramtypes', serviceConstructor);
+        const typesOfParameters: ServiceConstructor[] = Reflect.getMetadata('design:paramtypes', serviceConstructor) ?? [];
         serviceRegistryInstance.registerDependencies(serviceConstructor, typesOfParameters);
     }
 }
