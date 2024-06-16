@@ -1,13 +1,14 @@
 {
-    "eslint.enable": true,
+  "eslint.enable": true,
+  "eslint.runtime": "node", // FIXING: 현재 폴더의 node version을 사용하는 듯함 (왜인지는 모르겠으나, 이 옵션이 없으면 18버전을 가져다 씀.)
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[typescript]": {
-        "editor.formatOnSave": false,
-        "editor.codeActionsOnSave": {
-            "source.fixAll.eslint": "explicit"
-        },
-    },
-    // 씨발 이게 없어서 존나게 안 돌았던 거임 씨발련이
-    "eslint.experimental.useFlatConfig": true
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+
+  // Fixing: ESLint unable to find config file.
+  "eslint.experimental.useFlatConfig": true
 }

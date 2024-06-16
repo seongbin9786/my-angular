@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import swc from 'vite-plugin-swc-only';
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import swc from "vite-plugin-swc-only";
 
 export default defineConfig({
   esbuild: false,
@@ -21,7 +21,7 @@ export default defineConfig({
         },
       },
       module: {
-        type: 'es6'
+        type: "es6",
       },
     }),
   ],

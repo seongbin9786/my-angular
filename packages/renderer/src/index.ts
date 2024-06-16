@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 
-export * from './decorators';
-export * from './bootstraper';
+export * from "./decorators";
+export * from "./bootstraper";
