@@ -1,8 +1,6 @@
-import {
-  componentRegistryInstance,
-  moduleRegistryInstance,
-  serviceRegistryInstance,
-} from "./instances/registry-instances";
+import { ComponentRegistry } from "./registries/ComponentRegistry";
+import { NgModuleRegistry } from "./registries/NgModuleRegistry";
+import { ServiceRegistry } from "./registries/ServiceRegistry";
 import {
   ComponentConstructor,
   ModuleConstructor,
@@ -29,11 +27,11 @@ export const Component = (componentConfig: ComponentConfig) => {
     // FIXME:
     const typesOfParameters: ServiceConstructor[] =
       Reflect.getMetadata("design:paramtypes", componentConstructor) ?? [];
-    componentRegistryInstance.registerDependencies(
+    ComponentRegistry.getInstance().registerDependencies(
       componentConstructor,
       typesOfParameters,
     );
-    componentRegistryInstance.registerConfig(
+    ComponentRegistry.getInstance().registerConfig(
       componentConstructor,
       componentConfig,
     );
@@ -52,7 +50,8 @@ export const Injectable = () => {
 
     const typesOfParameters: ServiceConstructor[] =
       Reflect.getMetadata("design:paramtypes", serviceConstructor) ?? [];
-    serviceRegistryInstance.registerDependencies(
+
+    ServiceRegistry.getInstance().registerDependencies(
       serviceConstructor,
       typesOfParameters,
     );
@@ -71,6 +70,10 @@ export const NgModule = (moduleConfig: ModuleConfig) => {
     if (!(moduleConstructor instanceof Function)) {
       throw new Error("NgModule decorator must be used to classess");
     }
-    moduleRegistryInstance.registerConfig(moduleConstructor, moduleConfig);
+
+    NgModuleRegistry.getInstance().registerConfig(
+      moduleConstructor,
+      moduleConfig,
+    );
   };
 };

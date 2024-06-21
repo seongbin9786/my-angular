@@ -1,11 +1,19 @@
-import { serviceRegistryInstance } from "@renderer/instances/registry-instances";
 import {
   ComponentConstructor,
   ServiceConstructor,
 } from "@renderer/types/constructors";
 import { ComponentConfig } from "@renderer/types/decoratorConfig";
+import { ServiceRegistry } from "./ServiceRegistry";
 
 export class ComponentRegistry {
+  private static instance: ComponentRegistry | null;
+
+  static getInstance() {
+    if (!ComponentRegistry.instance) {
+      ComponentRegistry.instance = new ComponentRegistry();
+    }
+    return ComponentRegistry.instance;
+  }
   private refMapping = new Map<ComponentConstructor, ComponentConstructor>();
   private configMapping = new Map<ComponentConstructor, ComponentConfig>();
   private dependenciesMapping = new Map<
@@ -55,7 +63,7 @@ export class ComponentRegistry {
       const dependencies =
         this.dependenciesMapping.get(componentConstructor) ?? [];
       const serviceInstances = dependencies.map((serviceConstructor) =>
-        serviceRegistryInstance.getRef(serviceConstructor),
+        ServiceRegistry.getInstance().getRef(serviceConstructor),
       );
       console.log(
         `[ComponentRegistry] services to be injected to [${componentConstructor.name}]:`,

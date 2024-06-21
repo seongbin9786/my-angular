@@ -1,4 +1,4 @@
-import { componentRendererInstance } from "@renderer/instances/renderer-instances";
+import { ComponentRenderer } from "@renderer/dom/componentRenderer";
 import {
   ComponentConstructor,
   ServiceConstructor,
@@ -42,7 +42,7 @@ export class NgModuleRef {
       throw new Error("Bootstrap Component is not defined on root module.");
     }
 
-    componentRendererInstance.mount(this.bootstrap);
+    ComponentRenderer.getInstance().mount(this.bootstrap);
 
     console.log("@@@@@ INSTANTIATE FINISHED @@@@@");
   }

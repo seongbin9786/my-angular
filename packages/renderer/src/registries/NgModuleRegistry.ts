@@ -3,6 +3,15 @@ import { ModuleConstructor } from "@renderer/types/constructors";
 import { ModuleConfig } from "@renderer/types/decoratorConfig";
 
 export class NgModuleRegistry {
+  private static instance: NgModuleRegistry | null;
+
+  static getInstance() {
+    if (!NgModuleRegistry.instance) {
+      NgModuleRegistry.instance = new NgModuleRegistry();
+    }
+    return NgModuleRegistry.instance;
+  }
+
   private configMapping = new Map<ModuleConstructor, ModuleConfig>();
   private refMapping = new Map<ModuleConstructor, NgModuleRef>();
   /** @summary 루트 모듈 여부를 판단할 때 최초로 로딩되는 모듈 여부를 사용합니다. */

@@ -1,10 +1,19 @@
-import { componentRegistryInstance } from "@renderer/instances/registry-instances";
+import { ComponentRegistry } from "@renderer/registries/ComponentRegistry";
 import { ComponentConstructor } from "@renderer/types/constructors";
 
 export class ComponentRenderer {
+  private static instance: ComponentRenderer | null;
+
+  static getInstance() {
+    if (!ComponentRenderer.instance) {
+      ComponentRenderer.instance = new ComponentRenderer();
+    }
+    return ComponentRenderer.instance;
+  }
+
   mount(componentConstructor: ComponentConstructor) {
     const componentConfig =
-      componentRegistryInstance.getConfig(componentConstructor);
+      ComponentRegistry.getInstance().getConfig(componentConstructor);
     if (!componentConfig) {
       throw new Error(
         `[ComponentRenderer] Component Config is not found for [${componentConstructor.name}]`,
@@ -28,7 +37,7 @@ export class ComponentRenderer {
     }
 
     const componentInstance =
-      componentRegistryInstance.getRef(componentConstructor);
+      ComponentRegistry.getInstance().getRef(componentConstructor);
     // FIXME: 이렇게 하면 private field에 접근할 수 없습니다.
     // TODO: 각 값의 타입에 따라 다른 처리를 해야 할 수도 있습니다.
     const evaluatedTemplate = template.replace(/{{(\w+)}}/g, (_, propName) => {

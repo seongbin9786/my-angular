@@ -1,4 +1,4 @@
-import { moduleRegistryInstance } from "./instances/registry-instances";
+import { NgModuleRegistry } from "./registries/NgModuleRegistry";
 import { ModuleConstructor } from "./types/constructors";
 
 /**
@@ -12,7 +12,7 @@ export const bootstrapModule = (rootModule: ModuleConstructor) => {
   */
   console.log("@@@@@ USER APP STARTS @@@@@");
 
-  const rootModuleRef = moduleRegistryInstance.getRef(rootModule);
+  const rootModuleRef = NgModuleRegistry.getInstance().getRef(rootModule);
 
   console.log("rootModule - that was registered - found:", rootModuleRef);
 };
