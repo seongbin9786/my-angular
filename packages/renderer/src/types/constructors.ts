@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-export type ModuleConstructor = Function;
+export type ModuleConstructor = new(...args: any[]) => any;
 
 // eslint-disable-next-line
 export type ComponentConstructor = new(...args: any[]) => any;
